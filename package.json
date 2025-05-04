@@ -9,13 +9,68 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onStartupFinished",
+    "onView:aiPdlcChatView"
+  ],
   "main": "./dist/extension.js",
-  "contributes": {
+  "contributes": { 
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "aiPdlcChatContainer",
+          "title": "GigaStudio",
+          "icon": "resources/dark/chat.svg"
+        }
+      ]
+    },
+    "views": {
+      "aiPdlcChatContainer": [
+        {
+          "id": "aiPdlcChatView",
+          "name": "GigaStudio",   
+          "type": "webview",                 
+          "icon": "resources/dark/chat.svg"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "aiPdlc.newSession",
+          "when": "view == aiPdlcChatView",
+          "group": "navigation"
+        },
+        {
+          "command": "aiPdlc.toggleFullScreen",
+          "when": "view == aiPdlcChatView",
+          "group": "navigation"
+        },
+        {
+          "command": "aiPdlc.openSettings",
+          "when": "view == aiPdlcChatView",
+          "group": "navigation"
+        }
+      ]
+    },
     "commands": [
       {
-        "command": "ai-pdlc-plugin.helloWorld",
-        "title": "Hello World"
+        "command": "aiPdlc.newSession",
+        "title": "New Session",
+        "icon": "$(add)",
+        "group": "GigaStudio"
+      },
+      {
+        "command": "aiPdlc.toggleFullScreen",
+        "title": "Open in new window",
+        "icon": "$(link-external)",
+        "group": "GigaStudio"
+      },
+      {
+        "command": "aiPdlc.openSettings",
+        "title": "Open Settings",
+        "icon": "$(gear)",
+        "group": "GigaStudio"
       }
     ]
   },
@@ -34,16 +89,19 @@
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/vscode": "^1.99.0",
     "@types/mocha": "^10.0.10",
     "@types/node": "20.x",
+    "@types/vscode": "^1.99.0",
     "@typescript-eslint/eslint-plugin": "^8.28.0",
     "@typescript-eslint/parser": "^8.28.0",
-    "eslint": "^9.23.0",
-    "esbuild": "^0.25.1",
-    "npm-run-all": "^4.1.5",
-    "typescript": "^5.8.2",
     "@vscode/test-cli": "^0.0.10",
-    "@vscode/test-electron": "^2.4.1"
+    "@vscode/test-electron": "^2.4.1",
+    "esbuild": "^0.25.1",
+    "eslint": "^9.23.0",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.8.2"
+  },
+  "dependencies": {
+    "vscode": "^1.1.37"
   }
 }
