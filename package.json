@@ -14,7 +14,7 @@
     "onView:aiPdlcChatView"
   ],
   "main": "./dist/extension.js",
-  "contributes": { 
+  "contributes": {
     "viewsContainers": {
       "activitybar": [
         {
@@ -28,8 +28,8 @@
       "aiPdlcChatContainer": [
         {
           "id": "aiPdlcChatView",
-          "name": "GigaStudio",   
-          "type": "webview",                 
+          "name": "GigaStudio",
+          "type": "webview",
           "icon": "resources/dark/chat.svg"
         }
       ]
@@ -86,7 +86,8 @@
     "pretest": "npm run compile-tests && npm run compile && npm run lint",
     "check-types": "tsc --noEmit",
     "lint": "eslint src",
-    "test": "vscode-test"
+    "test": "vscode-test",
+    "build:web": "cd web && npm install && npm run build"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
@@ -102,6 +103,11 @@
     "typescript": "^5.8.2"
   },
   "dependencies": {
+    "react": "^19.1.0",
     "vscode": "^1.1.37"
+  },
+  "overrides": {
+    "minimatch": "^3.0.5",
+    "minimist": ">=1.2.6"
   }
 }
