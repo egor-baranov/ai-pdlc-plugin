@@ -1,16 +1,36 @@
 {
 	"compilerOptions": {
+		// target modern Node/Electron environment
 		"module": "Node16",
+		"moduleResolution": "Node16",       // ← must match "module" when using Node16 :contentReference[oaicite:0]{index=0}
 		"target": "ES2022",
-		"lib": [
-			"ES2022"
-		],
+		"lib": ["ES2022"],
+
+		// source maps for debugging
 		"sourceMap": true,
+
+		// your source and output
 		"rootDir": "src",
-		"strict": true,   /* enable all strict type-checking options */
-		/* Additional Checks */
-		// "noImplicitReturns": true, /* Report error when not all code paths in function return a value. */
-		// "noFallthroughCasesInSwitch": true, /* Report errors for fallthrough cases in switch statement. */
-		// "noUnusedParameters": true,  /* Report errors on unused parameters. */
-	}
+		"outDir": "dist",
+
+		// strict type-checking
+		"strict": true,
+
+		// node module resolution, interoperability
+		"esModuleInterop": true,
+		"resolveJsonModule": true,
+
+		// only pull in Node and VS Code extension API types
+		"types": ["node", "vscode"],
+
+		// ignore mismatches in external declaration files
+		"skipLibCheck": true
+	},
+	"include": ["src"],
+	"exclude": [
+		"node_modules",
+		"web",
+		"out",
+		"**/*.spec.ts"
+	]
 }

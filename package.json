@@ -3,17 +3,16 @@
   "displayName": "ai-pdlc-plugin",
   "description": "AI PDLC Plugin",
   "version": "0.0.1",
-  "engines": {
-    "vscode": "^1.99.0"
-  },
-  "categories": [
-    "Other"
-  ],
+  "engines": { "vscode": "^1.99.0" },
+  "categories": ["Other"],
+
   "activationEvents": [
-    "onStartupFinished",
-    "onView:aiPdlcChatView"
+    "onView:aiPdlcChatView",
+    "onStartupFinished"
   ],
+
   "main": "./dist/extension.js",
+
   "contributes": {
     "viewsContainers": {
       "activitybar": [
@@ -24,6 +23,7 @@
         }
       ]
     },
+
     "views": {
       "aiPdlcChatContainer": [
         {
@@ -34,6 +34,7 @@
         }
       ]
     },
+
     "menus": {
       "view/title": [
         {
@@ -53,6 +54,7 @@
         }
       ]
     },
+
     "commands": [
       {
         "command": "aiPdlc.newSession",
@@ -87,12 +89,14 @@
     "check-types": "tsc --noEmit",
     "lint": "eslint src",
     "test": "vscode-test",
-    "build:web": "cd web && npm install && npm run build"
+    "build:web": "cd web && npm install && npm run build",
+    "serve:web": "npx serve web/out -p 5000",
+    "postinstall": "npm run build:web"
   },
   "devDependencies": {
+    "@types/jest": "^29.5.14",
     "@types/mocha": "^10.0.10",
     "@types/node": "20.x",
-    "@types/vscode": "^1.99.0",
     "@typescript-eslint/eslint-plugin": "^8.28.0",
     "@typescript-eslint/parser": "^8.28.0",
     "@vscode/test-cli": "^0.0.10",
@@ -103,6 +107,7 @@
     "typescript": "^5.8.2"
   },
   "dependencies": {
+    "@types/vscode": "^1.99.1",
     "react": "^19.1.0",
     "vscode": "^1.1.37"
   },

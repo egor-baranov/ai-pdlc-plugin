@@ -36,6 +36,8 @@ class ChatViewProvider implements vscode.WebviewViewProvider {
   resolveWebviewView(webviewView: vscode.WebviewView) {
     this._view = webviewView;
 
+    console.log(`Out dir path: ${path.join(this.context.extensionPath, "web", "out")}`);
+
     webviewView.webview.options = {
       enableScripts: true,
       localResourceRoots: [
