@@ -1,6 +1,5 @@
 import * as vscode from "vscode";
 import * as path from "path";
-import * as fs from "fs";
 
 export function activate(context: vscode.ExtensionContext) {
     const chatProvider = new ChatViewProvider(context);
@@ -9,19 +8,19 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.window.registerWebviewViewProvider(
             "aiPdlcChatView",
             chatProvider,
-            { webviewOptions: { retainContextWhenHidden: true } }
+            {webviewOptions: {retainContextWhenHidden: true}}
         )
     );
 
     context.subscriptions.push(
         vscode.commands.registerCommand("aiPdlc.newSession", () => {
-            chatProvider.postMessageToWebview({ type: "newSession" });
+            chatProvider.postMessageToWebview({type: "newSession"});
         }),
         vscode.commands.registerCommand("aiPdlc.chatList", () => {
-            vscode.window.showInformationMessage("Chat list not implemented.");
+            chatProvider.postMessageToWebview({type: "chatList"});
         }),
         vscode.commands.registerCommand("aiPdlc.openSettings", () => {
-            chatProvider.postMessageToWebview({ type: "settings" });
+            chatProvider.postMessageToWebview({type: "settings"});
         })
     );
 }
@@ -29,7 +28,8 @@ export function activate(context: vscode.ExtensionContext) {
 class ChatViewProvider implements vscode.WebviewViewProvider {
     private _view?: vscode.WebviewView;
 
-    constructor(private readonly context: vscode.ExtensionContext) {}
+    constructor(private readonly context: vscode.ExtensionContext) {
+    }
 
     public resolveWebviewView(webviewView: vscode.WebviewView) {
         this._view = webviewView;
@@ -57,7 +57,7 @@ class ChatViewProvider implements vscode.WebviewViewProvider {
             <script src="${scriptUri}"></script>
           </body>
         </html>
-        `
+        `;
     }
 
     public postMessageToWebview(message: any) {
